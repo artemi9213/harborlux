@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Harborlux — Claim Your Summit</title>
+<meta name="description" content="Harborlux: harbour-view penthouses above a city that never sleeps. Claim your summit.">
+<link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format("woff2")}
+:root{--bg:#0D0A22;--ink:#180F3C;--btn:#F2B8C0;--btnh:#F7C9D0;--u:min(calc(100vw/1440),calc(100svh/900))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);overflow-x:clip;scroll-behavior:smooth}
+html.lock{overflow:hidden}
+body{background:var(--bg);overflow-x:clip}
+body{font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.track{position:relative;height:1400svh}
+.hero{position:sticky;top:0;isolation:isolate;width:100%;height:100svh;min-height:520px;overflow:hidden;background:var(--bg)}
+.stage{position:absolute;left:50%;top:50%;width:max(100%,calc(max(100svh,520px)*16/9));aspect-ratio:16/9;transform:translate(-50%,-50%)}
+.layer{position:absolute;inset:0;will-change:transform;backface-visibility:hidden}
+.head,.opening,.door,.nav,.l,.kicker{will-change:transform,opacity}
+.rain,.opening video{will-change:opacity}
+.layer img,.layer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.back{transform-origin:50% 40%}
+.mid{transform-origin:50% 45%}
+.front{transform-origin:50% 100%}
+.rain{opacity:0;transition:opacity .7s linear}
+.rain.on{opacity:1}
+.shade{position:absolute;left:0;right:0;top:0;height:45%;background:linear-gradient(to bottom,rgba(13,8,40,.45),rgba(13,8,40,0));pointer-events:none}
+.tint{position:absolute;left:5.2%;right:4.1%;top:57.9%;height:25.4%;background:linear-gradient(180deg,rgba(190,200,255,.10),rgba(150,160,230,.05) 60%,rgba(120,130,210,.08));border-top:1px solid rgba(255,255,255,.18)}
+.head{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;pointer-events:none}
+.kicker{position:absolute;left:0;right:0;text-align:center;font-weight:300;letter-spacing:-.01em;line-height:1;white-space:nowrap;color:#fff}
+h1{position:absolute;left:50%;transform:translateX(-50%);width:max-content;font-weight:700;letter-spacing:-.045em;line-height:1;white-space:nowrap;color:#fff}
+h1 .l{display:inline-block}
+.opening{position:absolute;inset:0;z-index:6;pointer-events:none}
+.opening img,.opening video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.opening video{opacity:0}
+.doors{position:absolute;inset:0;z-index:7;pointer-events:none}
+.door{position:absolute;top:0;bottom:0;width:50%;background-color:#050409;background-size:200% 100%;background-repeat:no-repeat}
+.door.l{left:0;background-position:0 50%}
+.door.r{right:0;background-position:100% 50%}
+/* nav */
+.nav{position:fixed;z-index:20;top:calc(var(--u)*52);left:0;right:0;height:calc(var(--u)*48);padding:0 calc(var(--u)*125);display:flex;align-items:center;justify-content:space-between;font-size:calc(var(--u)*15)}
+.brand{font-weight:600;font-size:calc(var(--u)*17);letter-spacing:.28em;color:#fff}
+.pill{position:absolute;left:50%;top:0;height:100%;transform:translateX(-50%);display:flex;align-items:center;padding:calc(var(--u)*5);gap:calc(var(--u)*6);border-radius:999px;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.pill a{display:flex;align-items:center;justify-content:center;height:calc(var(--u)*38);padding:0 calc(var(--u)*22);border-radius:999px;font-weight:400;color:rgba(255,255,255,.88);white-space:nowrap;transition:background .25s}
+.pill a:hover{background:rgba(255,255,255,.14)}
+.pill a.act{background:#fff;color:var(--ink);font-weight:600}
+.right{display:flex;align-items:center;gap:calc(var(--u)*30)}
+.lang{display:flex;align-items:center;gap:calc(var(--u)*9);color:rgba(255,255,255,.9)}
+.lang svg{width:calc(var(--u)*20);height:calc(var(--u)*20);fill:none;stroke:#fff;stroke-width:1.5}
+.cta{display:flex;align-items:center;height:calc(var(--u)*44);padding:0 calc(var(--u)*27);border-radius:999px;background:var(--btn);color:var(--ink);font-weight:600;transition:transform .25s,background .25s}
+.cta:hover{transform:translateY(-1px);background:var(--btnh)}
+/* start states */
+.intro .nav,.intro .kicker,.intro .l{opacity:0}
+.intro .front{transform:translateY(66%)}
+.intro .shade{opacity:0}
+@media (max-width:819.98px){
+ :root{--u:1px}
+ .nav{top:16px;height:auto;padding:0 18px;flex-wrap:wrap;row-gap:12px}
+ .brand{font-size:14px;letter-spacing:.22em;order:1}
+ .right{order:2;gap:12px}
+ .lang{font-size:13px;gap:6px}.lang svg{width:16px;height:16px}
+ .cta{height:36px;padding:0 16px;font-size:13px}
+ .pill{order:3;position:static;transform:none;width:100%;height:40px;padding:4px;gap:4px}
+ .pill a{flex:1;height:32px;font-size:12px;padding:0 10px}
+}
+@media (max-width:360px){.pill a{font-size:11px;padding:0 6px}}
+@media (max-height:500px) and (orientation:landscape){
+ :root{--u:1px}
+ .nav{top:12px;height:34px;padding:0 24px;flex-wrap:nowrap;row-gap:0;font-size:12px}
+ .brand{font-size:13px;letter-spacing:.28em}
+ .right{gap:20px}.lang{font-size:12px}
+ .cta{height:32px;font-size:12px;padding:0 18px}
+ .pill{position:absolute;left:50%;top:0;transform:translateX(-50%);width:auto;height:34px;padding:3px;gap:4px;order:0}
+ .pill a{height:28px;font-size:12px;padding:0 14px;flex:none}
+}
+
+/* scroll sections */
+.sec{position:relative;background:var(--bg);padding:140px 8vw;scroll-margin-top:0}
+.sec .eyebrow{font-weight:300;font-size:15px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:24px}
+.sec h2{font-weight:700;letter-spacing:-.045em;line-height:1;font-size:clamp(44px,8vw,120px);max-width:12ch}
+.sec p.lead{margin-top:32px;max-width:56ch;font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.78)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;margin-top:80px;border-top:1px solid rgba(255,255,255,.14);padding-top:40px}
+.stats b{display:block;font-weight:700;font-size:clamp(36px,4vw,60px);letter-spacing:-.04em}
+.stats span{font-weight:300;color:rgba(255,255,255,.7)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:72px}
+.card{min-height:360px;padding:32px;border-radius:28px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(160deg,#2a1f5e,#180F3C 55%,#0D0A22);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);transition:transform .35s}
+.card:hover{transform:translateY(-6px)}
+.card small{font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.card h3{margin-top:12px;font-weight:700;font-size:32px;letter-spacing:-.03em}
+.card p{margin-top:10px;font-weight:300;color:rgba(255,255,255,.78)}
+#contact{text-align:center;display:flex;flex-direction:column;align-items:center;min-height:80svh;justify-content:center}
+#contact h2{max-width:none}
+#contact .cta{margin-top:48px;height:56px;padding:0 40px;font-size:16px}
+.foot{background:var(--bg);padding:32px 8vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.1);font-weight:300;font-size:14px;color:rgba(255,255,255,.6)}
+@media (max-width:819.98px){.sec{padding:96px 24px}.foot{padding:28px 24px}}
+
+/* section images */
+.band{position:relative;margin-top:72px;aspect-ratio:21/9;border-radius:28px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);background:#180F3C}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.band:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,10,34,.55),transparent 50%)}
+.duo{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:24px}
+.duo .band{margin-top:0;aspect-ratio:4/3}
+.card{position:relative;overflow:hidden;background-color:#180F3C;background-repeat:no-repeat}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,10,34,.95),rgba(13,10,34,.2) 62%,rgba(13,10,34,.05));z-index:0}
+.card>*{position:relative;z-index:1}
+.c1{background-image:url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063055_ee1debcd-d200-484f-b94f-fad6dcffd4eb.png&w=900&q=85");background-size:cover;background-position:50% 40%}
+.c2{background-image:url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063252_b9f2fecf-9be0-485f-842f-3aa6bbc251f2.png&w=900&q=85");background-size:cover;background-position:50% 62%}
+.c3{background-image:url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063151_7804d758-a2eb-4499-9b56-8f493edbb206.png&w=900&q=85"),url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063251_24fbd7cc-00df-49ec-8fbf-d8a0349b1e98.png&w=900&q=85");background-size:cover,cover;background-position:50% 100%,50% 50%}
+#contact{background:linear-gradient(rgba(13,10,34,.5),rgba(13,10,34,.9)),url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063251_24fbd7cc-00df-49ec-8fbf-d8a0349b1e98.png&w=1800&q=85") 50% 40%/cover no-repeat}
+@media (max-width:819.98px){.band{aspect-ratio:4/3}.duo{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="track" id="top"><section class="hero intro" id="hero">
+ <div class="stage" id="stage">
+  <div class="layer back" id="back">
+   <img id="iBack" alt="" decoding="async">
+   <video class="rain" id="rA" muted playsinline preload="auto" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063703_04e54df7-2236-4dff-b95b-a9a34c1f78ec.mp4"></video>
+   <video class="rain" id="rB" muted playsinline preload="auto" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063703_04e54df7-2236-4dff-b95b-a9a34c1f78ec.mp4"></video>
+   <div class="shade" id="shade"></div>
+  </div>
+  <div class="head" id="head">
+   <div class="kicker" id="kicker">Claim Your</div>
+   <h1 id="h1" aria-label="Claim Your Summit"><span class="l" aria-hidden="true">S</span><span class="l" aria-hidden="true">u</span><span class="l" aria-hidden="true">m</span><span class="l" aria-hidden="true">m</span><span class="l" aria-hidden="true">i</span><span class="l" aria-hidden="true">t</span></h1>
+  </div>
+  <div class="layer mid" id="mid"><img id="iMid" alt="" decoding="async"></div>
+  <div class="layer front" id="front"><div class="tint"></div><img id="iFront" alt="" decoding="async"></div>
+ </div>
+
+ <nav class="nav" id="nav">
+  <a class="brand" href="/">HARBORLUX</a>
+  <div class="pill">
+   <a class="act" href="#top" data-s="top">Home</a><a href="#firm" data-s="firm">The Firm</a><a href="#homes" data-s="homes">Skyline Homes</a><a href="#contact" data-s="contact">Talk To Us</a>
+  </div>
+  <div class="right">
+   <div class="lang"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg><span>Eng</span></div>
+   <a class="cta" href="#contact">Enquire</a>
+  </div>
+ </nav>
+
+ <div class="opening" id="opening">
+  <img id="iAerial" alt="" decoding="async">
+  <video id="tilt" muted playsinline preload="auto" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261117_063355_a600befc-45d6-4a32-9db6-9d6565a89609.mp4"></video>
+ </div>
+ <div class="doors" id="doors"><div class="door l" id="dL"></div><div class="door r" id="dR"></div></div>
+</section></div>
+
+<section class="sec" id="firm">
+ <p class="eyebrow">The Firm</p>
+ <h2>Built above the weather.</h2>
+ <p class="lead">Harborlux designs and sells harbour-view penthouses for people who prefer the skyline to the street. Every residence is placed above the cloud line, with glass on every side and the whole city at your feet.</p>
+ <div class="band"><img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063252_b9f2fecf-9be0-485f-842f-3aa6bbc251f2.png&w=1800&q=85" alt="Neon harbour skyline at night in the rain" loading="lazy" decoding="async"></div>
+ <div class="duo">
+  <div class="band"><img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063055_ee1debcd-d200-484f-b94f-fad6dcffd4eb.png&w=1000&q=85" alt="Rooftop pool seen from above" loading="lazy" decoding="async" style="object-position:50% 50%"></div>
+  <div class="band"><img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261117_063251_24fbd7cc-00df-49ec-8fbf-d8a0349b1e98.png&w=800&q=85" alt="Storm clouds over the harbour" loading="lazy" decoding="async" style="object-position:50% 30%"></div>
+ </div>
+ <div class="stats">
+  <div><b>62</b><span>floors above the harbour</span></div>
+  <div><b>360°</b><span>skyline views</span></div>
+  <div><b>24/7</b><span>private concierge</span></div>
+  <div><b>9</b><span>residences in total</span></div>
+ </div>
+</section>
+
+<section class="sec" id="homes">
+ <p class="eyebrow">Skyline Homes</p>
+ <h2>Pick your altitude.</h2>
+ <div class="cards">
+  <article class="card c1"><small>Level 58</small><h3>The Harbour Suite</h3><p>Glass balcony, rooftop pool access, west-facing skyline.</p></article>
+  <article class="card c2"><small>Level 60</small><h3>The Neon Terrace</h3><p>Wraparound terrace above the marina and the night traffic.</p></article>
+  <article class="card c3"><small>Level 62</small><h3>The Summit</h3><p>The full-floor penthouse with a private rooftop pool.</p></article>
+ </div>
+</section>
+
+<section class="sec" id="contact">
+ <p class="eyebrow">Talk To Us</p>
+ <h2>Claim your summit.</h2>
+ <a class="cta" href="mailto:hello@harborlux.example">Enquire</a>
+</section>
+<footer class="foot"><span>HARBORLUX</span><span>© 2026 Harborlux. All rights reserved.</span></footer>
+
+<script>
+(function(){
+var D=7400,$=function(i){return document.getElementById(i)};
+var hero=$('hero'),stage=$('stage'),h1=$('h1'),kicker=$('kicker'),nav=$('nav');
+var P=function(id){return 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_'+id+'.png&w='};
+var SRC={door:P('20261117_063048_97fd9a70-adbe-46bd-bfce-ec1004f6c7d8'),aerial:P('20261117_063055_ee1debcd-d200-484f-b94f-fad6dcffd4eb'),back:P('20261117_063251_24fbd7cc-00df-49ec-8fbf-d8a0349b1e98'),mid:P('20261117_063252_b9f2fecf-9be0-485f-842f-3aa6bbc251f2'),front:P('20261117_063151_7804d758-a2eb-4499-9b56-8f493edbb206')};
+var vw0=window.innerWidth,vh0=Math.max(window.innerHeight,520);
+var sw=Math.max(vw0,vh0*16/9),dpr=window.devicePixelRatio||1;
+var W=Math.min(2688,Math.max(800,Math.ceil(sw*dpr/100)*100));
+var url=function(k){return SRC[k]+W+'&q=85'};
+var wpe=0;
+function layout(){
+ var vw=hero.clientWidth,vh=hero.clientHeight;
+ var sW=Math.max(vw,vh*16/9),sH=sW*9/16;
+ stage.style.width=sW+'px';
+ var portrait=vh>1.2*vw;
+ var base=(portrait?.362:.43)*sH;
+ if(!wpe){var old=h1.style.fontSize;h1.style.fontSize='100px';wpe=h1.getBoundingClientRect().width/100;h1.style.fontSize=old}
+ var stageTop=(vh-sH)/2,baseVp=stageTop+base;
+ var navB=nav.getBoundingClientRect().bottom;
+ var a=.625*sW/wpe,b=.92*vw/wpe,c=(baseVp-(navB+.035*vh))/.88;
+ var fs=Math.max(20,Math.min(a,b,c));
+ h1.style.fontSize=fs+'px';
+ h1.style.top=(base-.864*fs)+'px';
+ kicker.style.fontSize=(.118*fs)+'px';
+ kicker.style.top=(base-.747*fs)+'px';
+ kicker.style.paddingRight=(.2*fs)+'px';
+}
+var iB=$('iBack'),iM=$('iMid'),iF=$('iFront'),iA=$('iAerial');
+iB.src=url('back');iM.src=url('mid');iF.src=url('front');iA.src=url('aerial');
+$('dL').style.backgroundImage=$('dR').style.backgroundImage='url("'+url('door')+'")';
+var tilt=$('tilt'),rA=$('rA'),rB=$('rB'),opening=$('opening'),doors=$('doors');
+window.addEventListener('resize',layout);
+layout();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){wpe=0;layout()});
+
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce){document.getElementById('top').style.height='auto';hero.classList.remove('intro');opening.style.display='none';doors.style.display='none';return}
+
+/* rain loop */
+var LIM=3.6,active=null,swapping=false;
+function startRain(){
+ active=rA;rA.currentTime=0;rA.classList.add('on');rA.play().catch(function(){});
+}
+function onTU(e){
+ var v=e.target;
+ if(v!==active||swapping)return;
+ if(v.currentTime>LIM-.75){
+  swapping=true;
+  var o=v===rA?rB:rA;
+  o.currentTime=0;o.play().catch(function(){});o.classList.add('on');
+  v.classList.remove('on');active=o;
+  setTimeout(function(){v.pause();swapping=false},800);
+ }
+}
+rA.addEventListener('timeupdate',onTU);rB.addEventListener('timeupdate',onTU);
+
+/* timeline */
+var anims=[];
+function mk(el,pts){
+ var kf=[],f=pts[0],l=pts[pts.length-1];
+ if(f[0]>0)kf.push(Object.assign({offset:0},f[1]));
+ pts.forEach(function(p){kf.push(Object.assign({offset:p[0]/D},p[1],{easing:p[2]||'linear'}))});
+ if(l[0]<D)kf.push(Object.assign({offset:1},l[1]));
+ var a=el.animate(kf,{duration:D,fill:'both'});a.pause();anims.push(a);
+}
+var E1='cubic-bezier(.2,.65,.3,1)';
+mk($('dL'),[[20,{transform:'translateX(0)'},'cubic-bezier(.1,.2,.8,1)'],[1130,{transform:'translateX(-101%)'}]]);
+mk($('dR'),[[20,{transform:'translateX(0)'},'cubic-bezier(.4,.6,.9,1)'],[1240,{transform:'translateX(101%)'}]]);
+mk(tilt,[[1190,{opacity:0},'ease-in-out'],[1470,{opacity:1}]]);
+mk(opening,[[2450,{opacity:1},'cubic-bezier(.45,0,.55,1)'],[2950,{opacity:0}]]);
+mk(nav,[[2450,{opacity:0,transform:'translateY(-6px)'},'ease-out'],[2750,{opacity:1,transform:'translateY(0)'}]]);
+mk(kicker,[[2450,{opacity:0,transform:'translateY(.5em)'},E1],[3100,{opacity:1,transform:'translateY(0)'}]]);
+Array.prototype.forEach.call(h1.querySelectorAll('.l'),function(s,i){
+ var t=2450+i*54;
+ mk(s,[[t,{opacity:0,transform:'translateY(.14em)'},E1],[t+700,{opacity:1,transform:'translateY(0)'}]]);
+});
+mk($('shade'),[[2900,{opacity:0},'ease-in-out'],[3700,{opacity:1}]]);
+mk($('back'),[[2900,{transform:'translateY(0)'},'cubic-bezier(.45,0,.35,1)'],[4300,{transform:'translateY(-1.5%)'}]]);
+mk($('mid'),[[2900,{transform:'translateY(0)'},'cubic-bezier(.45,0,.3,1)'],[4300,{transform:'translateY(-4%)'},'linear'],[4600,{transform:'translateY(-4%)'},'cubic-bezier(.45,0,.55,1)'],[6900,{transform:'translateY(0)'}]]);
+mk($('head'),[[3000,{transform:'translateY(6%)'},'cubic-bezier(.3,0,.4,1)'],[4800,{transform:'translateY(0)'}]]);
+mk($('front'),[[3350,{transform:'translateY(66%)'},'cubic-bezier(.2,.5,.2,1)'],[6000,{transform:'translateY(-2.5%)'},'cubic-bezier(.45,0,.55,1)'],[7300,{transform:'translateY(0)'}]]);
+
+var track=$('top'),rainOn=false,rainPaused=false,cur=0,target=0,raf=0,ready=false,maxScroll=1,lastTs=0;
+tilt.pause();
+function measure(){maxScroll=Math.max(1,track.offsetHeight-hero.clientHeight)}
+function tNow(){return Math.min(1,Math.max(0,(window.pageYOffset||0)/maxScroll))*D}
+/* tilt video: play forward (no seeking), seek only when scrolling back */
+function vid(t){
+ var dur=tilt.duration||5.04;
+ if(t>3000){if(!tilt.paused)tilt.pause();return false}
+ var tg=Math.min(dur,Math.max(0,(t-1250)/1600*dur)),d=tg-tilt.currentTime;
+ if(d>.04){
+  var r=Math.min(6,Math.max(.1,d*5));
+  if(Math.abs(tilt.playbackRate-r)>.05)tilt.playbackRate=r;
+  if(tilt.paused)tilt.play().catch(function(){});
+  return true;
+ }
+ if(!tilt.paused)tilt.pause();
+ if(d<-.04){if(!tilt.seeking)tilt.currentTime=tg;return true}
+ return false;
+}
+function apply(t){
+ for(var i=0;i<anims.length;i++)anims[i].currentTime=t;
+ if(t>=2400&&!rainOn){rainOn=true;startRain()}
+ return vid(t);
+}
+function loop(ts){
+ raf=0;
+ var dt=lastTs?Math.min(64,ts-lastTs):16;lastTs=ts;
+ var d=target-cur;
+ if(Math.abs(d)<2)cur=target;else cur+=d*(1-Math.exp(-dt/300));
+ var busy=apply(cur);
+ if(cur!==target||busy)raf=requestAnimationFrame(loop);else lastTs=0;
+}
+function onScroll(){
+ target=tNow();
+ if(!ready)return;
+ var past=(window.pageYOffset||0)>maxScroll+window.innerHeight*.6;
+ if(past&&!rainPaused){rainPaused=true;rA.pause();rB.pause()}
+ else if(!past&&rainPaused){rainPaused=false;if(active)active.play().catch(function(){})}
+ if(!raf)raf=requestAnimationFrame(loop);
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',function(){measure();onScroll()});
+measure();
+function go(){
+ if(ready)return;ready=true;
+ measure();cur=target=tNow();apply(cur);hero.classList.remove('intro');
+}
+function imgReady(i){return new Promise(function(r){if(i.complete&&i.naturalWidth)r();else{i.addEventListener('load',r);i.addEventListener('error',r)}})}
+function doorReady(){return new Promise(function(r){var m=new Image();m.onload=m.onerror=r;m.src=url('door')})}
+function vidReady(v){return new Promise(function(r){if(v.readyState>=4)r();else{v.addEventListener('canplaythrough',r,{once:true});v.addEventListener('error',r,{once:true});v.load()}})}
+var fs0=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();
+Promise.all([doorReady(),imgReady(iA),imgReady(iB),imgReady(iM),imgReady(iF),vidReady(tilt),fs0]).then(function(){setTimeout(go,120)});
+setTimeout(go,5000);
+})();
+(function(){
+ var links=[].slice.call(document.querySelectorAll('.pill a')),ids=['top','firm','homes','contact'];
+ function upd(){
+  var y=window.innerHeight*.4,cur='top';
+  ids.forEach(function(i){var e=document.getElementById(i);if(e&&e.getBoundingClientRect().top<=y)cur=i});
+  links.forEach(function(a){a.classList.toggle('act',a.dataset.s===cur)});
+ }
+ window.addEventListener('scroll',upd,{passive:true});upd();
+})();
+</script>
+</body>
+</html>
